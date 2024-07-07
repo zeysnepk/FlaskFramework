@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title%}
+        HOMEPAGE
+        {% endblock %}
+    </title>
+</head>
+<body>
+    <h3>WELCOME!!</h3>
+    <p>*********************</p>
+    <h5>ARTICLE</h5>
+    <p>{{ article.title }}</p> <!--article data from python is written in 2 brackets-->
+    <p>{{ article.body }}</p>
+    {% block new_p %}
+    {% endblock %}
+</body>
+</html>
