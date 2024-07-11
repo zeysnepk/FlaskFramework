@@ -5,4 +5,14 @@
 <hr>
 <p>No Info :((((((((((((((((((((((((((((((((((((</p>
 <hr>
+<ul>
+    {% for i in numbers %}
+    <li>{{i}}</li>
+    {% endfor %}
+</ul>
+<ul>
+    {% for movie in movies %}
+    <li>Movie Name: {{movie.title}} - Year: {{movie.year}} - Director: {{movie.director}}</li>
+    {% endfor %}
+</ul>
 {% endblock %}
