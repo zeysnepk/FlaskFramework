@@ -3,7 +3,14 @@ from flask_mysqldb import MySQL # Import the MySQL class from the flask_mysqldb 
 from wtforms import Form, StringField, TextAreaField, PasswordField, validators 
 from passlib.hash import sha256_crypt 
 
-
+class Register(Form):
+    name = StringField("Name", validators=[validators.Length(min=4, max=25), validators.DataRequired(message="Enter name")]) # Define a name field with validation
+    surname = StringField("Surname", validators=[validators.Length(min=4, max=25), validators.DataRequired(message="Enter surname")]) # Define a surname field with validation
+    email = StringField("E-mail", validators=[validators.DataRequired(message=("Enter e-mail adress")), validators.Email(message="Invalid email")]) # Define an email field with validation
+    username = StringField("Username", validators=[validators.Length(min=4, max=20), validators.DataRequired(message="Enter username")]) # Define a username field with validation
+    password = PasswordField("Password", validators=[validators.DataRequired(message="Enter password"), validators.EqualTo(fieldname="confirm", message="Passwords do not match")]) # Define a password field with validation and a confirm password field with the same name
+    confirm = PasswordField("Confirm Password") # Define a confirm password field with the same name
+    
 app = Flask(__name__) # Create a new Flask instance
 
 app.config["MYSQL_HOST"] = "localhost" # Define the MySQL host
@@ -42,6 +49,14 @@ def me():
 @app.route("/movies/<string:id>") # Define a route for the /movies/<id> URL
 def detail(id):
     return "Movie Id:" + id # Return the movie ID
+
+@app.route("/register", methods = ['GET', 'POST']) # Define a route for the /register URL with GET and POST methods
+def register():
+    form = Register(request.form) # Create a new instance of the Register form class
+    if request.method == 'POST': # Check if the form was submitted
+        return redirect(url_for("homepage")) # Redirect to the homepage URL after successful form submission
+    else:
+        return render_template("register.html", form = form) # Render the register.html template with the provided form
     
 if __name__ == "__main__": # Check if the script is being run directly
     app.run(debug=True) # Run the Flask application with debug mode enabled
