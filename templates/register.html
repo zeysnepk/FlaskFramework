@@ -4,7 +4,7 @@
 {% from "includes/formhelpers.html" import render_field %}
 <h2>Please Register</h2>
 <hr>
-<form method = "post">
+<form method="POST">
     {{ render_field(form.name, class = "form-control")}}
     {{ render_field(form.surname, class = "form-control")}}
     {{ render_field(form.email, class = "form-control")}}
@@ -13,5 +13,6 @@
     {{ render_field(form.confirm, class = "form-control")}}
     <button type="submit" class="btn btn-success">REGISTER</button>
 </form>
+
 
 {% endblock %}
