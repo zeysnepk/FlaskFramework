@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block title %}
+<title>MESSAGE</title>
+{% endblock %}
+{% block body %}
+{% if message %}
+<h4>{{ message.title }}</h4>
+<hr>
+Username: {{ message.user }} 
+<hr>
+Date: {{ message.time }}
+<hr>
+{{ message.message | safe}}
+{% else %}
+<div class = "alert alert-warning">
+    No message found. Please check your message ID or try again.
+</div>
+{% endif %}
+{% endblock %}
